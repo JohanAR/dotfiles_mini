@@ -1,0 +1,17 @@
+#!/usr/bin/zsh
+
+function install_file {
+  SRC=$(readlink -f $1)
+  DEST=${HOME}/.${SRC:t}
+
+  if [[ -e ${DEST} ]]; then
+    echo "Destination file ${DEST} exists"
+  else
+    echo "Installed ${SRC} as ${DEST}"
+    ln -s ${SRC} ${DEST}
+  fi
+}
+
+install_file vimrc
+install_file tmux.conf
+install_file myzsh/zshrc
