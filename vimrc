@@ -1,7 +1,7 @@
 set nocompatible
 filetype indent plugin on
 syntax enable
-" set number
+set number
 " set foldmethod=indent
 set foldnestmax=3
 set showmatch
@@ -12,7 +12,7 @@ set tabstop=2
 set softtabstop=2
 set smarttab
 set history=100
-set ignorecase
+"set ignorecase
 set incsearch
 set magic
 set hlsearch

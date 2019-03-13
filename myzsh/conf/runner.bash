@@ -6,6 +6,11 @@ RCFILE=$3
 
 set --
 
+if [ ! -p $INPIPE -o ! -p $OUTPIPE ]; then
+  echo "Args not pipes"
+  exit 1
+fi
+
 trap "echo clean up; rm -f $INPIPE $OUTPIPE" EXIT
 
 export TOP_PID=$$
@@ -15,18 +20,18 @@ if [ -f $RCFILE ]; then
 fi
 
 while true; do
-echo "Bash runner ($TOP_PID) ready"
-read -r -a cmd <$INPIPE
-{
-  echo "** ${cmd[@]} **"
-  case "${cmd[0]}" in
-    d) date ;;
-    r) cd ${cmd[1]} &&
-       eval "${cmd[@]:2}" ;;
-    q) echo "bye"
-       kill -s EXIT $TOP_PID ;;
-    *) echo "What?" ;;
-  esac
-} 2>&1 1>$OUTPIPE
+  echo "Bash runner ($TOP_PID) ready"
+  read -r -a cmd <$INPIPE
+  {
+    echo "** ${cmd[@]} **"
+    case "${cmd[0]}" in
+      d) date ;;
+      r) cd ${cmd[1]} &&
+         eval "${cmd[@]:2}" ;;
+      q) echo "bye"
+         kill -s EXIT $TOP_PID ;;
+      *) echo "What?" ;;
+    esac
+  } 2>&1 1>$OUTPIPE
 done
 
