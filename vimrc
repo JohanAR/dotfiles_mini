@@ -56,6 +56,9 @@ nnoremap <C-X> :bprev<CR>:bdelete#<CR>
 :highlight NonText ctermfg=DarkGray guifg=Blue gui=bold
 :highlight LineNr ctermfg=DarkGray guifg=Yellow
 :highlight Visual cterm=reverse ctermbg=NONE
+:highlight Search ctermbg=DarkYellow
+:highlight StatusLineNC ctermfg=DarkGray ctermbg=LightGrey
+:highlight VertSplit ctermfg=DarkGray ctermbg=Black
 
 " Read output of shell command into scratch buffer
 :command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
