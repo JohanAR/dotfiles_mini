@@ -8,7 +8,7 @@ set showmatch
 set backspace=eol,start,indent
 set expandtab
 set shiftwidth=2
-set tabstop=2
+set tabstop=4
 set softtabstop=2
 set smarttab
 set history=100
@@ -27,6 +27,7 @@ set hidden
 set mouse=a
 let g:PHP_vintage_case_default_indent=1
 set relativenumber
+set cursorline
 colorscheme peachpuff
 let mapleader = "'"
 
@@ -59,7 +60,11 @@ nnoremap <C-X> :bprev<CR>:bdelete#<CR>
 :highlight Search ctermbg=DarkYellow
 :highlight StatusLineNC ctermfg=DarkGray ctermbg=LightGrey
 :highlight VertSplit ctermfg=DarkGray ctermbg=Black
+:highlight CursorLine cterm=bold
 
 " Read output of shell command into scratch buffer
 :command! -nargs=* -complete=shellcmd R new | setlocal buftype=nofile bufhidden=hide noswapfile | r !<args>
 
+" File type dependent indentation
+autocmd FileType java setlocal shiftwidth=4 softtabstop=4
+autocmd FileType xml setlocal shiftwidth=4 softtabstop=4

@@ -37,6 +37,10 @@ source $ZSHHOME/conf/gitalias.zsh
 source $ZSHHOME/conf/bashrun.zsh
 
 chcd() { cd $($ZSHHOME/prog/chcd.py "$1") }
+alias cpd='pwd | xclip'
+alias cdc='cd $(xclip -o)'
+alias hex='printf "0x%x\n"'
+alias dec='printf "%d\n"'
 
 bindkey -v
 

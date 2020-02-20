@@ -4,7 +4,8 @@ function do_bash_run {
     mkfifo $_bash_runner_inpipe $_bash_runner_outpipe
     chmod 700 $_bash_runner_inpipe $_bash_runner_outpipe
 
-    /bin/bash $ZSHHOME/conf/runner.bash $_bash_runner_inpipe $_bash_runner_outpipe ${HOME}/.bashrc &!
+    #/bin/bash $ZSHHOME/conf/runner.bash $_bash_runner_inpipe $_bash_runner_outpipe ${HOME}/.bashrc &!
+    /bin/bash $ZSHHOME/conf/runner.bash $_bash_runner_inpipe $_bash_runner_outpipe ${HOME}/.bashrc.runner &!
     _bash_runner_pid=$!
     echo $_bash_runner_pid >! $_bash_runner_lock
   fi

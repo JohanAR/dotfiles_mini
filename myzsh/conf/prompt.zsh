@@ -86,6 +86,8 @@ function prompt_sorin_precmd {
     RET_STR=' '
   fi
 
+  JOBS_STR="%(1j. %{$fg[yellow]%}%jj%{$reset_color%}.)"
+
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
@@ -93,7 +95,7 @@ function prompt_sorin_precmd {
   prompt_sorin_pwd
 
   # Define prompts.
-  RPROMPT='${(e)editor_info[overwrite]}$RET_STR${VIM:+" %B%{$fg[cyan]%}V%{$reset_color%}%b"}'
+  RPROMPT='${(e)editor_info[overwrite]}$RET_STR$JOBS_STR${VIM:+" %B%{$fg[cyan]%}V%{$reset_color%}%b"}'
 
   # Kill the old process of slow commands if it is still running.
   if (( _prompt_sorin_precmd_async_pid > 0 )); then

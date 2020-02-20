@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env zsh
 
 function install_file {
   SRC=$(readlink -f $1)
@@ -14,4 +14,4 @@ function install_file {
 
 install_file vimrc
 install_file tmux.conf
-install_file myzsh/zshrc
+install_file myzsh/zshrc.user
