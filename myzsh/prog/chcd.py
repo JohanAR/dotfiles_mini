@@ -17,7 +17,10 @@ def meFirstGen(iterable):
 
 def recfind(curpath, dirs, lastdir):
 #    print(curpath, dirs, lastdir)
-    files = os.listdir(curpath)
+    try:
+        files = os.listdir(curpath)
+    except OSError:
+        return None
     if not dirs:
         if lastdir in files:
             finalpath = os.path.join(curpath, lastdir)
