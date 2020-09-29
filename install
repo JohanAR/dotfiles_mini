@@ -14,4 +14,5 @@ function install_file {
 
 install_file vimrc
 install_file tmux.conf
+install_file bashrc.user
 install_file myzsh/zshrc.user

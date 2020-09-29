@@ -1,0 +1,69 @@
+export LANG="en_US.UTF-8"
+
+if [[ -f $HOME/workplace.bash ]]; then
+  source $HOME/workplace.bash
+fi
+
+###  Handling of history fom all shells
+## Begin
+# for setting history length
+HISTSIZE=10000
+HISTFILESIZE=$HISTSIZE
+
+# avoid duplicates
+#HISTCONTROL=ignoredups:erasedups
+HISTCONTROL=ignoredups:ignorespace
+
+# append history entries
+shopt -s histappend
+
+# Prompt
+export PS1="\[\033[38;5;3m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\][\[$(tput sgr0)\]\[\033[38;5;12m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]]\[$(tput sgr0)\]\[\033[38;5;10m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+
+
+alias g=git
+alias d='dirs -v'
+alias ..='cd ..'
+alias ...='cd ../..'
+
+### cd = pushd ###
+
+dedup() {
+  declare -a new=() copy=("${DIRSTACK[@]:1}")
+  declare -A seen
+  local v i
+  seen[$PWD]=1
+  for v in "${copy[@]}"; do
+    if [ -z "${seen[$v]}" ]; then
+      new+=("$v")
+      seen[$v]=1
+    fi
+  done
+  dirs -c
+  for ((i=${#new[@]}-1; i>=0; i--)); do
+    builtin pushd -n "${new[i]}" >/dev/null
+  done
+}
+
+pushcd() {
+  pushd -n $PWD > /dev/null
+  builtin cd "$@"
+  dedup
+}
+
+# Test if bash has high enough version to run dedup
+if dedup 2> /dev/null ; then
+  echo "Using cd = pushd"
+  alias 1='pushcd ${DIRSTACK[1]}'
+  alias 2='pushcd ${DIRSTACK[2]}'
+  alias 3='pushcd ${DIRSTACK[3]}'
+  alias 4='pushcd ${DIRSTACK[4]}'
+  alias 5='pushcd ${DIRSTACK[5]}'
+  alias 6='pushcd ${DIRSTACK[6]}'
+  alias 7='pushcd ${DIRSTACK[7]}'
+  alias 8='pushcd ${DIRSTACK[8]}'
+  alias 9='pushcd ${DIRSTACK[9]}'
+  alias cd=pushcd
+else
+  echo "Bash version too low for cd = pushd"
+fi
