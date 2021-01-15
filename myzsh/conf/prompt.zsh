@@ -109,7 +109,7 @@ function prompt_sorin_precmd {
 }
 
 function prompt_sorin_cleanup {
-  rm $_prompt_sorin_precmd_async_data
+  rm -f $_prompt_sorin_precmd_async_data
 }
 
 function prompt_sorin_setup {

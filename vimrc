@@ -49,8 +49,8 @@ set laststatus=2
 set list
 set listchars=tab:>-,trail:-,extends:>,precedes:<,conceal:C,nbsp:%
 
-nnoremap <C-N> :bnext<CR>
-nnoremap <C-P> :bprev<CR>
+nnoremap <C-K> :bnext<CR>
+nnoremap <C-J> :bprev<CR>
 nnoremap <C-X> :bprev<CR>:bdelete#<CR>
 
 :highlight SpecialKey ctermfg=DarkGray guifg=Cyan
